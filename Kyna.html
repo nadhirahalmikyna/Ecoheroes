@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Kyna</title>
+
+    <style>
+        /* ====== BASE LAYOUT ====== */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+
+            /* Background dibuat gradient supaya nyatu dengan warna gambar */
+            background: linear-gradient(180deg, #0e1a2b, #1c2b40, #415a77, #829bb8);
+            background-size: cover;
+            background-position: center;
+
+            overflow-x: hidden;
+        }
+
+        /* Wrapper agar gambar tetap rapi & proporsional */
+        .image-wrapper {
+            width: 100%;
+            max-width: 1542px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Dibuat responsive */
+        .main-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(1.02); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* ====== BUTTON STYLE ====== */
+        .main-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 16px 36px;
+
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+
+            background: linear-gradient(#1565c0, #0d47a1);
+            border-radius: 18px;
+            cursor: pointer;
+
+            box-shadow: 0 8px 0 #0b3c91, 0 12px 26px rgba(0,0,0,0.4);
+
+            transition: 
+                transform 0.18s ease,
+                box-shadow 0.22s ease,
+                text-shadow 0.22s ease;
+
+            opacity: 0;
+            animation: slideUp 1.2s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 0 #0b3c91,
+                        0 18px 30px rgba(13, 71, 161, 0.6);
+            text-shadow: 0 0 14px rgba(255,255,255,0.9);
+        }
+
+        .main-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 5px 0 #0b3c91;
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .main-btn {
+                font-size: 20px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="image-wrapper">
+        <img 
+            src="img/kyna penjelasan.png" 
+            alt="Penjelasan Kyna" 
+            class="main-img"
+        />
+    </div>
+
+    <a href="permasalahan kyna.html" class="main-btn">
+        YUK KITA LIHAT PERMASALAHANNYA!!
+    </a>
+
+</body>
+</html>

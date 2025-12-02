@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Game Pisahkan Sampah</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #d9f7ff;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 5px;
+    }
+
+    #game-area {
+        max-width: 900px;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .trash {
+        display: inline-block;
+        cursor: grab;
+        margin: 15px;
+        user-select: none;
+    }
+
+    .trash img {
+        width: 180px;
+        height: auto;
+        transition: 0.2s;
+    }
+
+    .bin {
+        width: 240px;
+        background: white;
+        border-radius: 18px;
+        border: 4px solid #333;
+        display: inline-block;
+        margin: 20px;
+        padding: 10px;
+        font-size: 26px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .bin img {
+        width: 150px;
+        margin-top: 10px;
+    }
+
+    #score {
+        font-size: 28px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    /* Confetti */
+    .confetti {
+        position: fixed;
+        top: -10px;
+        width: 10px;
+        height: 14px;
+        background-color: red;
+        animation: fall 2.4s linear forwards;
+        z-index: 9999;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(120vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Tombol back home*/
+    #backHome {
+        display: none;
+        margin-top: 25px;
+        padding: 14px 28px;
+        font-size: 22px;
+        background: #00bfff;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.25s;
+    }
+
+    #backHome:hover {
+        background: #008ecc;
+        transform: scale(1.05);
+    }
+
+</style>
+</head>
+
+<body>
+
+<h2>Pisahkan Sampah Organik & Anorganik</h2>
+<p>Seret gambar sampah ke tong yang benar!</p>
+
+<div id="game-area">
+    <div class="trash" draggable="true" data-type="anorganik"><img src="img/botol.png"></div>
+    <div class="trash" draggable="true" data-type="organik"><img src="img/pisang.png"></div>
+    <div class="trash" draggable="true" data-type="organik"><img src="img/daun.png"></div>
+    <div class="trash" draggable="true" data-type="anorganik"><img src="img/kardus.png"></div>
+    <div class="trash" draggable="true" data-type="organik"><img src="img/tulang ikan.png"></div>
+
+    <br><br>
+
+    <div class="bin" id="organik" data-type="organik">
+        Organik
+        <img src="img/organik.png">
+    </div>
+
+    <div class="bin" id="anorganik" data-type="anorganik">
+        Anorganik
+        <img src="img/anorganik.png">
+    </div>
+</div>
+
+<div id="score">Score: 0</div>
+
+<button id="backHome" onclick="location.href='index.html'">Back to Home</button>
+
+<script>
+    let score = 0;
+    const trashItems = document.querySelectorAll(".trash");
+    const bins = document.querySelectorAll(".bin");
+    let draggedItem = null;
+    const totalTrash = trashItems.length;
+
+    trashItems.forEach(item => {
+        item.addEventListener("dragstart", () => {
+            draggedItem = item;
+        });
+    });
+
+    bins.forEach(bin => {
+        bin.addEventListener("dragover", e => e.preventDefault());
+
+        bin.addEventListener("drop", () => {
+            if (!draggedItem) return;
+
+            let trashType = draggedItem.getAttribute("data-type");
+            let binType = bin.getAttribute("data-type");
+
+            if (trashType === binType) {
+                score++;
+                draggedItem.style.opacity = "0";
+                draggedItem.style.pointerEvents = "none";
+                bin.style.background = "#b8ffbf";
+            } else {
+                bin.style.background = "#ffb8b8";
+            }
+
+            setTimeout(() => {
+                bin.style.background = "white";
+            }, 400);
+
+            document.getElementById("score").innerText = "Score: " + score;
+
+            if (score === totalTrash) {
+                startConfetti();
+                showBackHome();
+            }
+        });
+    });
+
+    function startConfetti() {
+        for (let i = 0; i < 150; i++) {
+            let c = document.createElement("div");
+            c.classList.add("confetti");
+
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.backgroundColor = randomColor();
+            c.style.animationDuration = (Math.random() * 1 + 1.5) + "s";
+            c.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            document.body.appendChild(c);
+
+            setTimeout(() => { c.remove(); }, 3000);
+        }
+    }
+
+    function randomColor() {
+        const colors = ["#ff5959", "#ffcb42", "#8deaff", "#9dff8c", "#ff9de6"];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function showBackHome() {
+        document.getElementById("backHome").style.display = "inline-block";
+    }
+</script>
+
+</body>
+</html>

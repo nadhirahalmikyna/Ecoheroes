@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f3f3f3;
+        text-align: center;
+    }
+
+    /* ==== Gambar utama ==== */
+    .hero-wrapper {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .hero-wrapper img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+
+    /* ==== Tombol Start (3D Pop-up) ==== */
+    .start-btn {
+        display: inline-block;
+        margin: 32px auto 45px auto;
+        padding: 16px 38px;             
+        font-size: 26px;                 
+        background: linear-gradient(#4caf50, #3c8c41);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: 0.22s ease;
+        
+        /* Efek 3D */
+        box-shadow: 
+            0 6px 0 #2f6e34,
+            0 10px 18px rgba(0,0,0,0.25);
+    }
+
+    .start-btn:hover {
+        transform: translateY(-6px) scale(1.08);
+        box-shadow:
+            0 10px 0 #2f6e34,
+            0 18px 30px rgba(0,0,0,0.35),
+            0 0 22px #4caf50;
+    }
+
+    .start-btn:active {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow:
+            0 4px 0 #2f6e34,
+            0 10px 20px rgba(0,0,0,0.28);
+    }
+</style>
+
+</head>
+<body>
+
+<!-- ==== Gambar ==== -->
+<div class="hero-wrapper">
+    <img src="img/judul.png" alt="">
+    <img src="img/earth.png" alt="">
+</div>
+
+<!-- ==== Tombol start ==== -->
+<button class="start-btn" onclick="goStart()">
+    START
+</button>
+
+<script>
+function goStart() {
+    window.location.href = "choose character.html";
+}
+</script>
+
+</body>
+</html>
